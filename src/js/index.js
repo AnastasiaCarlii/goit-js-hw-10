@@ -1,4 +1,10 @@
 import axios from 'axios';
+import SlimSelect from 'slim-select';
+import 'slim-select/dist/slimselect.css';
+
+new SlimSelect({
+  select: '#single',
+});
 
 axios.defaults.headers.common['x-api-key'] =
   'live_569M8WA1rbrKuOyDARN9KjkPG0iY3771VVLpsuMj7XjhIKgb0fZfDzkMSaSfkH1k';
@@ -14,7 +20,7 @@ const refs = {
   error: document.querySelector('.error'),
 };
 
-refs.divCatInfo.classList.add('unvisible');
+refs.divCatInfo.classList.add('hidden');
 
 //function getAllCats(arr)
 
@@ -39,7 +45,7 @@ refs.selector.addEventListener('change', createModal);
 // function onSelectBreed
 
 function onSelectBreed() {
-  refs.loader.classList.remove('unvisible');
+  refs.loader.classList.remove('hidden');
 
   const selectedValue = refs.selector.options[refs.selector.selectedIndex];
   const selectedId = selectedValue.value;
@@ -56,10 +62,13 @@ function markup(arr) {
   let catTemperament = arr.map(cat => cat.breeds[0].temperament);
 
   const markup = `<img class="cat-img" src="${imgUrl}" width="400">
-    <h2 class="heading ">Description:</h2> <p class="text ">${catDesc}</p>
-    <h2 class="heading ">Temperament:</h2><p class="text ">${catTemp}</p>`;
+    <h2 class="heading ">Description:</h2> <p class="text ">${catDescription}</p>
+    <h2 class="heading ">Temperament:</h2><p class="text ">${catTemperament}</p>`;
 
   refs.divCatInfo.insertAdjacentHTML('beforeend', markup);
+  new SlimSelect({
+    select: '#single',
+  });
 }
 
 // function createModal
@@ -73,10 +82,12 @@ function createModal() {
 
   fetchCatByBreed(breedId)
     .then(markup)
-    .catch(showError)
+    .catch(() => {
+      Notify.failure('Oops! Something went wrong! Try reloading the page!');
+    })
     .finally(() => {
-      refs.loader.classList.add('unvisible');
-      refs.divCatInfo.classList.remove('unvisible');
+      refs.loader.classList.add('hidden');
+      refs.divCatInfo.classList.remove('hidden');
     });
 }
 

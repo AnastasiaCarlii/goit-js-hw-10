@@ -16,9 +16,9 @@ const API_KEY =
 // };
 
 export function fetchBreeds() {
-  return fetch(`${BASE_URL}/breeds?api-key=${API_KEY}`).then(response => {
+  return fetch(`${BASE_URL}breeds?api-key=${API_KEY}`).then(response => {
     if (!response.ok) {
-      Notify.failure('😿Oops! Something went wrong! Try reloading the page!');
+      Notify.failure('Oops! Something went wrong! Try reloading the page!');
     }
     return response.json();
   });
@@ -26,11 +26,11 @@ export function fetchBreeds() {
 
 export function fetchCatByBreed(breedId) {
   return fetch(
-    `${BASE_URL}/images/search?breed_ids=${breedId}&api_key=${API_KEY}`
+    `${BASE_URL}images/search?breed_ids=${breedId}&api_key=${API_KEY}`
   )
     .then(response => {
       if (!response.ok) {
-        notifyFailure('😿Oops! Something went wrong! Try reloading the page!');
+        Notify.failure('Oops! Something went wrong! Try reloading the page!');
       }
       return response.json();
     })
