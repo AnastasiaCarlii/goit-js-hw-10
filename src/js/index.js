@@ -48,7 +48,7 @@ refs.selector.addEventListener('change', createModal);
 
 function onSelectBreed() {
   refs.loader.classList.remove('hidden');
-  refs.myloader.classList.remove('hidden');
+  refs.myLoader.classList.remove('hidden');
 
   const selectedValue = refs.selector.options[refs.selector.selectedIndex];
   const selectedId = selectedValue.value;
@@ -91,7 +91,7 @@ function createModal() {
     .finally(() => {
       refs.loader.classList.add('hidden');
       refs.divCatInfo.classList.remove('hidden');
-      refs.myloader.classList.add('hidden');
+      refs.myLoader.classList.add('hidden');
     });
 }
 
