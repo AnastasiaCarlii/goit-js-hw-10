@@ -18,8 +18,10 @@ const refs = {
   divCatInfo: document.querySelector('.cat-info'),
   loader: document.querySelector('.loader'),
   error: document.querySelector('.error'),
+  myLoader: document.querySelector('.myloader'),
 };
 
+refs.myLoader.classList.add('hidden');
 refs.divCatInfo.classList.add('hidden');
 
 //function getAllCats(arr)
@@ -46,6 +48,7 @@ refs.selector.addEventListener('change', createModal);
 
 function onSelectBreed() {
   refs.loader.classList.remove('hidden');
+  refs.myloader.classList.remove('hidden');
 
   const selectedValue = refs.selector.options[refs.selector.selectedIndex];
   const selectedId = selectedValue.value;
@@ -88,6 +91,7 @@ function createModal() {
     .finally(() => {
       refs.loader.classList.add('hidden');
       refs.divCatInfo.classList.remove('hidden');
+      refs.myloader.classList.add('hidden');
     });
 }
 
